@@ -39,9 +39,9 @@ public class Order {
     @CreationTimestamp                  //Automatically adds timestamp
     private Date dateCreated;
 
-    @Column(name="date_updated")
+    @Column(name="last_updated")
     @UpdateTimestamp
-    private Date dateUpdates;
+    private Date lastUpdated;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
