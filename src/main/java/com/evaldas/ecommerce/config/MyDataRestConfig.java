@@ -1,9 +1,6 @@
 package com.evaldas.ecommerce.config;
 
-import com.evaldas.ecommerce.entity.Country;
-import com.evaldas.ecommerce.entity.Product;
-import com.evaldas.ecommerce.entity.ProductCategory;
-import com.evaldas.ecommerce.entity.State;
+import com.evaldas.ecommerce.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +37,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
         disableHttpMethods(Country.class, config, theUnsupportedActions);
         disableHttpMethods(State.class, config, theUnsupportedActions);
+        disableHttpMethods(Order.class, config, theUnsupportedActions);
 
         exposeIds(config);
 
