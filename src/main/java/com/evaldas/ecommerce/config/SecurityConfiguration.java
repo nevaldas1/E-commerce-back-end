@@ -14,7 +14,7 @@ public class SecurityConfiguration {
         //Protect endpoint
         http.authorizeRequests(configurer ->
                 configurer
-                        .antMatchers("/api/orders//**")
+                        .antMatchers("/api/orders/**")
                         .authenticated())
                         .oauth2ResourceServer()
                         .jwt();
