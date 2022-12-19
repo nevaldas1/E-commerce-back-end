@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name="state")
+@Table(name = "state")
 @Data
 public class State {
 
@@ -18,7 +18,7 @@ public class State {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="country_id")
+    @JoinColumn(name = "country_id")
     private Country country;
 
 }
