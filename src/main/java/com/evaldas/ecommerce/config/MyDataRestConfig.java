@@ -28,6 +28,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         entityManager = theEntityManager;
     }
 
+
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
@@ -44,12 +45,17 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         cors.addMapping(config.getBasePath() + "/**").allowedOrigins(theAllowedOrigins);
     }
 
-    private static void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
+
+    private static void disableHttpMethods(Class theClass,
+                                           RepositoryRestConfiguration config,
+                                           HttpMethod[] theUnsupportedActions) {
+
         config.getExposureConfiguration()
                 .forDomainType(theClass)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
     }
+
 
     private void exposeIds(RepositoryRestConfiguration config) {
 

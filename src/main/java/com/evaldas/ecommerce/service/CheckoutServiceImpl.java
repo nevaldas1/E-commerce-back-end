@@ -18,20 +18,22 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
-public class CheckoutServiceImpl implements CheckoutService{
+public class CheckoutServiceImpl implements CheckoutService {
 
     private CustomerRepository customerRepository;
 
-    @Autowired          // Optional, as we have single constructor
+    @Autowired
     public CheckoutServiceImpl(CustomerRepository customerRepository,
                                @Value("${stripe.key.secret}") String secretKey) {
         this.customerRepository = customerRepository;
         Stripe.apiKey = secretKey;
     }
 
+
     @Override
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
+
         Order order = purchase.getOrder();
 
         String orderTrackingNumber = generateOrderTrackingNumber();
@@ -62,6 +64,7 @@ public class CheckoutServiceImpl implements CheckoutService{
 
     @Override
     public PaymentIntent createPaymentIntent(PaymentInfo paymentInfo) throws StripeException {
+
         List<String> paymentMethodTypes = new ArrayList<>();
         paymentMethodTypes.add("card");
 
