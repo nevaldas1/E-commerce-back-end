@@ -11,21 +11,26 @@ import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 @Configuration
 public class SecurityConfiguration {
 
+    //Configuration class, that defines, who need to be authenticated
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         //Protect endpoint
         http.authorizeRequests(configurer ->
-                configurer
-                        .antMatchers("/api/orders/**")
-                        .authenticated())
-                        .oauth2ResourceServer()
-                        .jwt();
+                        configurer
+                                //Make endpoints accessible only to authenticated users.
+                                .antMatchers("/api/orders/**")
+                                .authenticated())
+                //Configures ourselves as OAuth2, adds support
+                .oauth2ResourceServer()
+                //Enables JWT (JSON Web Token) encoded bearer token support
+                .jwt();
 
         //Add cors filters
         http.cors();
 
-        //Add content negotiation strategy to support Okta sending back response
+        //Add content negotiation strategy to support Okta sending back response 401
+        //Handles information based on information in header
         http.setSharedObject(ContentNegotiationStrategy.class, new HeaderContentNegotiationStrategy());
 
         //Force a non-empty response body for 401
